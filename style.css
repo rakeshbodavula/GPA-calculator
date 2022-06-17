@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: large;
+    line-height: 1.2;
+}
+
+body {
+    /* background: linear-gradient(to left, #1d2671, #bb3f66); */
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+}
+
+.heading{
+    font-size: 40px;
+    margin-bottom: 5vh;
+}
+
+.container {
+    margin: 10vh 0;
+    line-height: 2;
+    color: #fff;
+}
+
+.input_div,
+.input_gpa_div {
+    margin-bottom: 8vh;
+}
+
+.btn {
+    margin: 3vh 0 0 0;
+    width: max-content;
+    background: linear-gradient(to right, red, purple);
+    padding: 3px;
+    position: relative;
+    left: 20%;
+}
+
+#enter_grades {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: #222;
+    color: white;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.show_gpa_div h1{
+    font-size: larger;
+}
+
+.input_gpa_div input[type="text"]{
+    margin-right: 2vw
+}
+
+input:focus{
+    background-color: rgb(250, 207, 151);
+}
+
+.course_count_div,.grade_credit_input_div{
+    margin-bottom: 2vh;
+}
