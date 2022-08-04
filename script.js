@@ -1,9 +1,5 @@
-const getPoints = (grade)=>{
-    grade = grade.toUpperCase()
-    if(grade.length!==1 || (grade!='O' && grade!='A' && grade!='B' && grade!='C' && grade!='D' && grade!='P' && grade!='F')){
-        return alert('Enter valid Grade!')
-    }
-    switch(grade){
+const getPoints = (grade) => {
+    switch (grade) {
         case 'O':
             return 10;
         case 'A':
@@ -23,48 +19,71 @@ const getPoints = (grade)=>{
 
 
 
-const showGPA = ()=>{
-    const count = document.getElementById('course_count').value
-    const sem = document.getElementById('sem').value
-    let points = 0,total_credits = 0  
-    for(let i=0;i<count;i++){
-        let grade = document.getElementById(`grade_${i}`).value
-        let credits = +document.getElementById(`credits_${i}`).value
-        if(getPoints(grade) === undefined) return
-        if(getPoints(grade) === 0) {
-            document.querySelector('.show_gpa_div').innerHTML=`<h1>Your Sem ${sem} SGPA is : <span> <em>Fail</em> :( <span></h1>`
-            return
-        }
-        points += getPoints(grade)*credits
-        total_credits+=credits
+
+let count = 1;
+let grades = []
+let credits = []
+
+const addGrade = (grade)=>{
+    const val = document.getElementById(grade).value;
+    grades.push(val);
+}
+
+const addCredit = (credit)=>{
+    const val = document.getElementById(credit).value;
+    credits.push(val)
+}
+
+const addCourse = () => {
+    count++;
+    document.querySelector(".input_div div").innerHTML += `<label for="grade_${count}" id="label1_${count}">Grade</label>
+    <input type="text" id="grade_${count}" onchange = "addGrade('grade_${count}')">
+    <label for="credits_${count}" id="label2_${count}">Credits</label>
+    <input type="number" id="credits_${count}" onchange = "addCredit('credits_${count}')">
+    <br>`;
+
+    for(i=0;i<grades.length && i<credits.length && i<count-1;i++){
+        document.getElementById(`grade_${i+1}`).value = grades[i];
+        document.getElementById(`credits_${i+1}`).value = credits[i];
     }
-    const cgpa = points/total_credits
-    document.querySelector('.show_gpa_div').innerHTML=`<h1>Your Sem ${sem} SGPA is : <span>${cgpa}</span></h1>`
 }
 
 
+const removeCourse = ()=>{
+    if(count==0) return alert("No Courses to delete")
+    document.getElementById(`credits_${count}`).remove();
+    document.getElementById(`grade_${count}`).remove();
+    document.getElementById(`label1_${count}`).remove();
+    document.getElementById(`label2_${count}`).remove();
+        count--;
+}
 
 
+const calculate = () => {
+    let credits_sum = 0, grade_sum = 0;
+    for (i = 0; i < count; i++) {
+        let grade = document.getElementById(`grade_${i + 1}`).value
+        grade = grade.toUpperCase()
+        if (grade.length !== 1 || (grade != 'O' && grade != 'A' && grade != 'B' && grade != 'C' && grade != 'D' && grade != 'P' && grade != 'F')) {
+            return alert('Enter valid Grade!')
+        }
+        let credit = parseInt(document.getElementById(`credits_${i + 1}`).value)
+        let point = getPoints(grade)
+        if (credit === undefined || credit < 1) return alert('Enter valid credits')
+        credits_sum += credit;
+        grade_sum += point * credit;
+    }
+    console.log(credits_sum,grade_sum)
+    const gpa = (grade_sum / credits_sum);
+    document.querySelector(".result").textContent = gpa;
+}
 
-document.getElementById('enter_grades').addEventListener('click', () => {
-    document.querySelector('.input_gpa_div').innerHTML=""
-    const course_count = document.querySelector('#course_count').value
-    const sem_No = document.querySelector('#sem').value
-    if (course_count < 1 || sem_No < 1 || sem_No > 8) {
-        return alert('Enter valid details')
-    }    
-    for (let i = 0; i <course_count; i++) {
-        document.querySelector('.input_gpa_div')
-                .innerHTML += `<div class="grade_credit_input_div">
-                                    <label for="grade_${i}">Grade</label>
-                                    <input type="text" value="p" id="grade_${i}">
-                                    
-                                    <label for="credits_${i}">Credits</label>
-                                    <input type="number" value=4 id="credits_${i}">
-                                </div>`    
-    }                            
-    document.querySelector('.input_gpa_div').innerHTML+=`<div class="btn">
-    <button onClick = "showGPA()" id="enter_grades">Show GPA</button>
-</div>`
-})    
+const input_form_add_btn = document.getElementById("add_btn");
+const input_form_remove_btn = document.getElementById("remove_btn");
+const output_btn = document.getElementById("calc_btn")
 
+output_btn.addEventListener('click', calculate)
+
+input_form_add_btn.addEventListener('click', addCourse)
+
+input_form_remove_btn.addEventListener('click',removeCourse)

@@ -7,57 +7,113 @@
 }
 
 body {
-    /* background: linear-gradient(to left, #1d2671, #bb3f66); */
+    position: relative;
+    top: 10vh;
     background-color: #222;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.heading{
-    font-size: 40px;
-    margin-bottom: 5vh;
+nav{
+    background-color: #5cbc5f;
+    height: 7vh;
+    width: 70%;
+    text-align: center;
 }
 
-.container {
-    margin: 10vh 0;
-    line-height: 2;
+nav h1{
     color: #fff;
+    line-height: 7vh;
+    font-size: calc(2vh + 1.5vw);
+    font-weight: 500;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.input_div,
-.input_gpa_div {
-    margin-bottom: 8vh;
+.container{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    min-height: 55vh;
 }
 
-.btn {
-    margin: 3vh 0 0 0;
-    width: max-content;
-    background: linear-gradient(to right, red, purple);
-    padding: 3px;
-    position: relative;
-    left: 20%;
+
+.input_div{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-#enter_grades {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background: #222;
-    color: white;
-    padding: .5rem;
+.input_div .form{
+    line-height: 2;
+}
+
+.input_div .form label{
+    margin-left: 3vw;
+    font-size: calc(0.9vh + 0.8vw);
+}
+
+.input_div .form input{
+    /* margin-right: 1vw; */
+    width: 15%;
+}
+
+.input_div .form,.output_div .form{
+    min-height: 40vh;
+    border: 1px solid;
+    padding: 1rem;
+    margin: auto;
+    height: 100%;
+    width: 85%;
+}
+
+.input_div h1,.output_div h1{
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: calc(1vh + 1vw);
+}
+
+#add_btn,#remove_btn{
+    margin: 2vh 0;
+    border-radius: 5px;
+    padding: calc(0.5vh + 0.5vw);
+    background-color: #5cbc5f;
+    color: #fff;
+    border: none;
     cursor: pointer;
 }
 
-.show_gpa_div h1{
-    font-size: larger;
+.output_div{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.input_gpa_div input[type="text"]{
-    margin-right: 2vw
+.form h3{
+    font-size: calc(1vh + 0.9vw);
 }
 
-input:focus{
-    background-color: rgb(250, 207, 151);
+#calc_btn{
+    margin-right: 5px;
+    margin-top: 2vh;
+    border-radius: 5px;
+    padding: calc(0.1vh + 0.5vw);
+    background-color: #5cbc5f;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
-.course_count_div,.grade_credit_input_div{
-    margin-bottom: 2vh;
+.manual{
+    color: #fff;
+    margin-top: 5vh;
+    border: 1px solid #fff;
+    padding: 10px;
 }
